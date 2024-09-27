@@ -1,0 +1,273 @@
+openapi: 3.0.0
+info:
+  title: HubForge API
+  description: Backend for a Peer-to-Peer Wiki and Note Platform that enables real-time collaboration and decentralized knowledge management. It handles data storage, syncing, and peer-to-peer communication, ensuring all data is stored locally and shared securely without relying on centralized servers.
+  version: 1.1.0
+paths:
+  /projects:
+    get:
+      summary: Get all projects
+      responses:
+        '200':
+          description: List of projects
+    post:
+      summary: Create a new project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          description: Project created
+  /projects/{projectId}:
+    get:
+      summary: Get a specific project by ID
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project data
+    put:
+      summary: Update a project by ID
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          description: Project updated
+    delete:
+      summary: Delete a project by ID
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Project deleted
+  /projects/{projectId}/directories:
+    get:
+      summary: Get all directories in a project
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of directories
+  /projects/{projectId}/directories/{directoryId}:
+    parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: directoryId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a directory by ID
+      responses:
+        '200':
+          description: Directory data
+    post:
+      summary: Create a new directory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Directory'
+      responses:
+        '201':
+          description: Directory created
+    put:
+      summary: Update a directory by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Directory'
+      responses:
+        '200':
+          description: Directory updated
+    delete:
+      summary: Delete a directory by ID
+      responses:
+        '204':
+          description: Directory deleted
+  /projects/{projectId}/directories/{directoryId}/files:
+    parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: directoryId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get all files in a directory
+      responses:
+        '200':
+          description: List of files
+  /projects/{projectId}/directories/{directoryId}/files/{fileId}:
+    parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: directoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a file by ID
+      responses:
+        '200':
+          description: File data
+    post:
+      summary: Create a new file
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+      responses:
+        '201':
+          description: File created
+    put:
+      summary: Update a file by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+      responses:
+        '200':
+          description: File updated
+    delete:
+      summary: Delete a file by ID
+      responses:
+        '204':
+          description: File deleted
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Directory:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        projectId:
+          type: string
+        parentId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        directoryId:
+          type: string
+        projectId:
+          type: string
+        content:
+          type: object
+          properties:
+            areas:
+              type: array
+              items:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    description: Base64 encoded title of the area (e.g., heading)
+                  body:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        description: Base64 encoded body text
+                      sections:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              description: Base64 encoded title for sub-section
+                            body:
+                              type: string
+                              description: Base64 encoded body for sub-section
+            isInUse:
+              type: array
+              items:
+                type: object
+                properties:
+                  area:
+                    type: integer
+                  user:
+                    type: string
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
