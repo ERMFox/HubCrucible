@@ -12,18 +12,7 @@ View the [Frontend](https://github.com/ERMFox/HubForge-Frontend) for setup and d
 - Decentralized, privacy-focused architecture
 
 # Installation
-Clone the repository:
-```sh
-git clone https://github.com/ERMFox/HubForge-Backend.git
-```
-Navigate into the project directory:
-```sh
-cd HubForge-Frontend
-```
-Install the required dependencies:
-```sh
-npm install
-```
+TBA
 
 # Licence
 View [LICENSE](LICENSE)
