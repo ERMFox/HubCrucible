@@ -14,7 +14,7 @@ View the [Frontend](https://github.com/ERMFox/HubForge-Frontend) for setup and d
 # Installation
 Clone the repository:
 ```sh
-git clone https://github.com/ERMFox/HubForge-Frontend.git
+git clone https://github.com/ERMFox/HubForge-Backend.git
 ```
 Navigate into the project directory:
 ```sh
