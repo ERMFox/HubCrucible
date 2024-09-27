@@ -1,5 +1,5 @@
 # HubForge-Backend
-Frontend for a Peer-to-Peer Wiki and Note Platform built in JavaScript. Enables real-time collaboration and decentralized knowledge management, allowing users to create, edit, and sync wikis and notes. All data is stored locally and shared securely across peers, ensuring privacy and control without centralized servers.
+Backend for a Peer-to-Peer Wiki and Note Platform that enables real-time collaboration and decentralized knowledge management. It handles data storage, syncing, and peer-to-peer communication, ensuring all data is stored locally and shared securely without relying on centralized servers. 
 
 # Project Structure
 This is part of the HubForge Project. To run the full platform, you will also need the Frontend component.
